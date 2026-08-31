@@ -1,18 +1,18 @@
-// JUST TOFU - Menu Database
-const MENU_DATA = [
+// JUST TOFU — Menu Database
+export const MENU_DATA = [
   {
     id: "tofu-pepper-soup",
     name: "Tofu Pepper Soup",
     category: "SOUPS",
     tags: ["SIGNATURE", "CHEF'S SPECIAL", "SPICY", "TOFU"],
     price: 17.50,
-    image: "images/tofu_pepper_soup.jpg",
+    image: "/images/tofu_pepper_soup.jpg",
     description: "Our legendary sizzling stone-pot silken tofu soup infused with fresh cracked black pepper, enoki mushrooms, rich golden broth, and vibrant chili threads.",
     isSignature: true,
     badge: "Chef's Signature ★",
     spiceLevel: 2,
     calories: "380 kcal",
-    dietary: ["Organic Non-GMO", "Gluten-Free Option", "Vegetarian / Vegan Available"]
+    dietary: ["Organic Non-GMO", "Gluten-Free Option", "Vegetarian / Vegan Available"],
   },
   {
     id: "crispy-tofu",
@@ -20,13 +20,13 @@ const MENU_DATA = [
     category: "TOFU",
     tags: ["POPULAR", "VEGAN", "CRUNCHY", "SIDES"],
     price: 12.50,
-    image: "images/crispy_tofu.jpg",
+    image: "/images/crispy_tofu.jpg",
     description: "Golden cubed organic tofu fried to airy crisp perfection, drizzled with savory scallion-garlic glaze and toasted white sesame.",
     isSignature: false,
     badge: "Fan Favorite",
     spiceLevel: 0,
     calories: "310 kcal",
-    dietary: ["100% Vegan", "Dairy-Free"]
+    dietary: ["100% Vegan", "Dairy-Free"],
   },
   {
     id: "spicy-tofu",
@@ -34,13 +34,13 @@ const MENU_DATA = [
     category: "TOFU",
     tags: ["SPICY", "HOUSE SPECIALTY", "SIDES"],
     price: 13.50,
-    image: "images/spicy_tofu.jpg",
+    image: "/images/spicy_tofu.jpg",
     description: "Pan-braised artisan tofu in a savory chili glaze reduction with caramelized garlic, sweet soy, and fresh scallions.",
     isSignature: false,
     badge: "Spicy Hit",
     spiceLevel: 3,
     calories: "340 kcal",
-    dietary: ["Vegan", "Nut-Free"]
+    dietary: ["Vegan", "Nut-Free"],
   },
   {
     id: "grilled-tofu",
@@ -48,13 +48,13 @@ const MENU_DATA = [
     category: "TOFU",
     tags: ["SMOKY", "GLUTEN-FREE", "HIGH PROTEIN"],
     price: 14.00,
-    image: "images/grilled_tofu.jpg",
+    image: "/images/grilled_tofu.jpg",
     description: "Char-grilled firm artisan tofu skewers brushed with house sweet tamari glaze, served with microgreens and roasted cherry tomatoes.",
     isSignature: false,
     badge: "High Protein",
     spiceLevel: 0,
     calories: "360 kcal",
-    dietary: ["Gluten-Free", "Vegan"]
+    dietary: ["Gluten-Free", "Vegan"],
   },
   {
     id: "tofu-bowl",
@@ -62,13 +62,13 @@ const MENU_DATA = [
     category: "TOFU",
     tags: ["FRESH", "POPULAR", "HEALTHY", "RICE"],
     price: 16.50,
-    image: "images/tofu_bowl.jpg",
+    image: "/images/tofu_bowl.jpg",
     description: "Nourishing grain bowl with crispy seasoned tofu, sliced Haas avocado, bright edamame, pickled daikon, purple cabbage, soft egg, and toasted sesame dressing.",
     isSignature: false,
     badge: "Balanced Nourish",
     spiceLevel: 0,
     calories: "490 kcal",
-    dietary: ["Vegetarian", "Vegan upon request"]
+    dietary: ["Vegetarian", "Vegan upon request"],
   },
   {
     id: "tofu-with-rice",
@@ -76,13 +76,13 @@ const MENU_DATA = [
     category: "RICE",
     tags: ["COMFORT", "POPULAR", "TOFU"],
     price: 15.00,
-    image: "images/tofu_rice.jpg",
+    image: "/images/tofu_rice.jpg",
     description: "Savory glazed braised tofu steak and delicate silken tofu cubes served over fragrant steamed multigrain rice with toasted seasoning and scallion relish.",
     isSignature: false,
     badge: "Comfort Bowl",
     spiceLevel: 1,
     calories: "450 kcal",
-    dietary: ["Vegan", "Nut-Free"]
+    dietary: ["Vegan", "Nut-Free"],
   },
   {
     id: "tofu-with-noodles",
@@ -96,7 +96,7 @@ const MENU_DATA = [
     badge: "Warm & Cozy",
     spiceLevel: 1,
     calories: "520 kcal",
-    dietary: ["Vegetarian", "Dairy-Free"]
+    dietary: ["Vegetarian", "Dairy-Free"],
   },
   {
     id: "tofu-and-rice",
@@ -104,27 +104,27 @@ const MENU_DATA = [
     category: "RICE",
     tags: ["CLASSIC", "TOFU"],
     price: 14.50,
-    image: "images/tofu_rice.jpg",
+    image: "/images/tofu_rice.jpg",
     description: "Simmered soy glazed tofu with sweet caramelized onions, served over fluffy steamed jasmine rice with house pickles on the side.",
     isSignature: false,
     badge: "Classic Set",
     spiceLevel: 0,
     calories: "420 kcal",
-    dietary: ["Vegan Option", "Low Sodium"]
+    dietary: ["Vegan Option", "Low Sodium"],
   },
   {
-    id: "kimchi-tofu-jjigae",
+    id: "silken-tofu-stew",
     name: "Silken Tofu Spicy Stew",
     category: "SOUPS",
     tags: ["SPICY", "HOUSE SPECIALTY"],
     price: 16.50,
-    image: "images/tofu_pepper_soup.jpg",
+    image: "/images/tofu_pepper_soup.jpg",
     description: "Bubbling clay pot stew packed with seasoned pickled cabbage, shiitake mushrooms, tender silken tofu, and savory broth. Served piping hot.",
     isSignature: false,
     badge: "Soul Food",
     spiceLevel: 3,
     calories: "390 kcal",
-    dietary: ["Gluten-Free", "Dairy-Free"]
+    dietary: ["Gluten-Free", "Dairy-Free"],
   },
   {
     id: "tofu-dan-dan-noodles",
@@ -138,10 +138,10 @@ const MENU_DATA = [
     badge: "Rich & Savory",
     spiceLevel: 2,
     calories: "560 kcal",
-    dietary: ["Vegan", "Contains Peanuts"]
+    dietary: ["Vegan", "Contains Peanuts"],
   },
   {
-    id: "banchan-trio",
+    id: "house-pickled-trio",
     name: "House Pickled Trio",
     category: "SIDES",
     tags: ["SIDE", "VEGAN"],
@@ -152,7 +152,7 @@ const MENU_DATA = [
     badge: "House Made",
     spiceLevel: 2,
     calories: "120 kcal",
-    dietary: ["Vegan", "Gluten-Free"]
+    dietary: ["Vegan", "Gluten-Free"],
   },
   {
     id: "sweet-ginger-tofu",
@@ -166,7 +166,7 @@ const MENU_DATA = [
     badge: "Sweet Treat",
     spiceLevel: 0,
     calories: "210 kcal",
-    dietary: ["Vegan", "Gluten-Free"]
+    dietary: ["Vegan", "Gluten-Free"],
   },
   {
     id: "matcha-soy-latte",
@@ -180,10 +180,10 @@ const MENU_DATA = [
     badge: "Café Favorite",
     spiceLevel: 0,
     calories: "140 kcal",
-    dietary: ["100% Vegan", "Organic"]
+    dietary: ["100% Vegan", "Organic"],
   },
   {
-    id: "sparkling-yuzu-ade",
+    id: "sparkling-citron-ade",
     name: "Sparkling Citron Ade",
     category: "DRINKS",
     tags: ["DRINK", "REFRESHING"],
@@ -194,10 +194,10 @@ const MENU_DATA = [
     badge: "Refreshing",
     spiceLevel: 0,
     calories: "110 kcal",
-    dietary: ["Vegetarian", "Gluten-Free"]
+    dietary: ["Vegetarian", "Gluten-Free"],
   },
   {
-    id: "fresh-warm-soymilk",
+    id: "fresh-soymilk",
     name: "Fresh Stoneground Soy Milk",
     category: "DRINKS",
     tags: ["DRINK", "HOUSE CRAFTED"],
@@ -208,70 +208,70 @@ const MENU_DATA = [
     badge: "100% Pure",
     spiceLevel: 0,
     calories: "120 kcal",
-    dietary: ["Vegan", "High Protein", "Gluten-Free"]
-  }
+    dietary: ["Vegan", "High Protein", "Gluten-Free"],
+  },
 ];
 
-// Featured items for "Our Tofu" section
-const FEATURED_ITEMS = [
-  "tofu-pepper-soup", // Signature
+export const FEATURED_IDS = [
+  "tofu-pepper-soup",
   "crispy-tofu",
   "spicy-tofu",
   "grilled-tofu",
   "tofu-bowl",
   "tofu-with-rice",
   "tofu-with-noodles",
-  "tofu-and-rice"
+  "tofu-and-rice",
 ];
 
-// Gallery Images
-const GALLERY_ITEMS = [
+export const GALLERY_ITEMS = [
   {
     title: "Signature Tofu Pepper Soup",
     subtitle: "Stone pot bubbling with rich broth & silken tofu",
     tag: "Signature Dish",
-    image: "images/tofu_pepper_soup.jpg"
+    image: "/images/tofu_pepper_soup.jpg",
   },
   {
     title: "Cozy Dining Atmosphere",
     subtitle: "Warm wood tones, natural lighting & cozy café charm",
     tag: "Atmosphere",
-    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80"
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Crispy Golden Tofu",
     subtitle: "Airy crust with scallion sesame glaze",
     tag: "Appetizer",
-    image: "images/crispy_tofu.jpg"
+    image: "/images/crispy_tofu.jpg",
   },
   {
     title: "Artisan Soy Crafting",
     subtitle: "100% organic non-GMO soybeans ground fresh daily",
     tag: "Craft",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80"
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Spicy Pan-Braised Tofu",
     subtitle: "Braised in sweet chili reduction glaze",
     tag: "House Specialty",
-    image: "images/spicy_tofu.jpg"
+    image: "/images/spicy_tofu.jpg",
   },
   {
     title: "Vibrant Nourish Bowl",
     subtitle: "Wholesome avocado, edamame & crispy tofu",
     tag: "Healthy Living",
-    image: "images/tofu_bowl.jpg"
+    image: "/images/tofu_bowl.jpg",
   },
   {
     title: "Char-Grilled Tofu Skewers",
     subtitle: "Tamari glazed with caramelized grill marks",
     tag: "Chef's Cut",
-    image: "images/grilled_tofu.jpg"
+    image: "/images/grilled_tofu.jpg",
   },
   {
     title: "Warm Rice & Tofu Pairings",
     subtitle: "Comforting bowls prepared with care",
     tag: "Comfort Food",
-    image: "images/tofu_rice.jpg"
-  }
+    image: "/images/tofu_rice.jpg",
+  },
 ];
+
+export const MENU_CATEGORIES = ["ALL", "SOUPS", "TOFU", "RICE", "NOODLES", "SIDES", "DRINKS"];
