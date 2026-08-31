@@ -8,7 +8,6 @@ export default function CartSidebar({ open, onClose }) {
     cartCount,
     subtotal,
     tax,
-    deliveryFee,
     total,
     removeFromCart,
     updateQty,
@@ -23,6 +22,7 @@ export default function CartSidebar({ open, onClose }) {
         className={`cart-drawer${open ? " active" : ""}`}
         id="cartDrawer"
         aria-label="Your Food Order Cart"
+        {...(!open ? { inert: "" } : {})}
       >
         <div className="cart-header">
           <h3 className="cart-title">

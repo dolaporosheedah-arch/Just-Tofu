@@ -20,14 +20,17 @@ export default function MobileDrawer({
         className={`mobile-drawer${open ? " open" : ""}`}
         id="mobileMenuDrawer"
         aria-label="Mobile Navigation"
-        aria-hidden={!open}
+        {...(!open ? { inert: "" } : {})}
       >
         {/* Drawer Header */}
         <div className="mobile-drawer-header">
           <a
             href="#home"
             className="brand-logo"
-            onClick={(e) => { e.preventDefault(); onNavigate("home"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("home");
+            }}
           >
             <img src="/images/logo.png" alt="JUST TOFU Logo" className="brand-logo-img" />
             <div className="brand-logo-text">
@@ -51,7 +54,10 @@ export default function MobileDrawer({
               key={link.href}
               href={`#${link.href}`}
               className="mobile-nav-link"
-              onClick={(e) => { e.preventDefault(); onNavigate(link.href); }}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(link.href);
+              }}
             >
               <span>{link.label}</span>
               <span>&rarr;</span>
@@ -82,7 +88,10 @@ export default function MobileDrawer({
             className="btn btn-primary mobile-nav-link"
             style={{ justifyContent: "center" }}
             id="mobileDrawerOrderBtn"
-            onClick={(e) => { e.preventDefault(); onNavigate("menu"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("menu");
+            }}
           >
             ORDER NOW
           </a>
