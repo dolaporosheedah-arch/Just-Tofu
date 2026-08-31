@@ -1,0 +1,9 @@
+{
+  "name": "just-tofu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JUST TOFU - Fresh, Delicious, Nourishing Artisanal Kitchen",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
