@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUST TOFU — Fresh, Delicious, Nourishing Artisanal Tofu Kitchen</title>
+  <meta name="description" content="This isn't just tofu. This is JUST TOFU. Fresh, delicious, nourishing artisanal tofu kitchen featuring our signature Tofu Pepper Soup, crispy bites, bowls, and wholesome plant-powered dining.">
+  <meta name="theme-color" content="#1E3A2B">
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="JUST TOFU — Artisanal Tofu Kitchen & Café">
+  <meta property="og:description" content="This isn't just tofu. This is JUST TOFU. Discover handcrafted artisanal tofu dishes made fresh daily.">
+  <meta property="og:image" content="images/hero_tofu_spread.jpg">
+  <meta property="og:type" content="restaurant.restaurant">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. NAVBAR
+       ========================================================================= -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <!-- Logo on the left -->
+      <a href="#home" class="brand-logo" id="navLogo" aria-label="JUST TOFU Home">
+        <img src="images/logo.png" alt="JUST TOFU Logo" class="brand-logo-img">
+        <div class="brand-logo-text">
+          <span class="brand-name">JUST TOFU</span>
+          <span class="brand-tagline-sub">FRESH &bull; DELICIOUS &bull; NOURISHING</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-desktop" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#featured" class="nav-link">Our Tofu</a>
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#reservations" class="nav-link">Reservations</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Header Actions: Cart & Order Now -->
+      <div class="header-actions">
+        <button class="cart-trigger-btn" data-action="open-cart" aria-label="View Shopping Cart" id="headerCartBtn">
+          <span>🛒</span>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <a href="#menu" class="btn btn-primary" id="headerOrderNowBtn">
+          <span>ORDER NOW</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileMenuDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <a href="#home" class="brand-logo">
+        <img src="images/logo.png" alt="JUST TOFU Logo" class="brand-logo-img">
+        <div class="brand-logo-text">
+          <span class="brand-name">JUST TOFU</span>
+          <span class="brand-tagline-sub">FRESH &bull; DELICIOUS &bull; NOURISHING</span>
+        </div>
+      </a>
+      <button class="mobile-drawer-close" data-action="close-mobile-menu" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="mobile-nav-list">
+      <a href="#home" class="mobile-nav-link"><span>Home</span> <span>&rarr;</span></a>
+      <a href="#featured" class="mobile-nav-link"><span>Our Tofu</span> <span>&rarr;</span></a>
+      <a href="#menu" class="mobile-nav-link"><span>Menu</span> <span>&rarr;</span></a>
+      <a href="#about" class="mobile-nav-link"><span>About</span> <span>&rarr;</span></a>
+      <a href="#gallery" class="mobile-nav-link"><span>Gallery</span> <span>&rarr;</span></a>
+      <a href="#reservations" class="mobile-nav-link"><span>Reservations</span> <span>&rarr;</span></a>
+      <a href="#contact" class="mobile-nav-link"><span>Contact</span> <span>&rarr;</span></a>
+    </nav>
+
+    <div class="mobile-drawer-footer">
+      <button class="btn btn-accent" data-action="open-cart" style="width:100%;" id="mobileDrawerCartBtn">
+        <span>🛒 View Cart</span>
+        <span class="cart-count-badge" style="position:static; display:none; border:none; margin-left:8px;">0</span>
+      </button>
+      <a href="#menu" class="btn btn-primary mobile-nav-link" style="justify-content:center;" id="mobileDrawerOrderBtn">ORDER NOW</a>
+    </div>
+  </div>
+
+  <div class="overlay-backdrop" id="mobileMenuOverlay"></div>
+
+  <!-- =========================================================================
+       2. HERO SECTION
+       ========================================================================= -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span>🌱</span> 100% Organic Non-GMO Soybeans &bull; Crafted Daily
+        </div>
+        <h1 class="hero-title">JUST TOFU</h1>
+        <p class="hero-tagline">“This isn't just tofu. This is JUST TOFU.”</p>
+        <p class="hero-desc">
+          Step into our warm artisanal kitchen. Fresh, velvety, crispy, and comforting tofu dishes reimagined with bold wholesome flavors.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-accent" id="heroOrderNowBtn">
+            <span>ORDER NOW</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#menu" class="btn btn-outline" id="heroViewMenuBtn">VIEW MENU</a>
+        </div>
+        <div class="hero-highlights">
+          <div class="hero-highlight-item">
+            <div class="highlight-icon">✓</div>
+            <span>Stoneground Fresh Daily</span>
+          </div>
+          <div class="hero-highlight-item">
+            <div class="highlight-icon">🍲</div>
+            <span>Signature Pepper Broth</span>
+          </div>
+          <div class="hero-highlight-item">
+            <div class="highlight-icon">✨</div>
+            <span>Cozy Dining Vibe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-card">
+          <img src="images/hero_tofu_spread.jpg" alt="Artisanal JUST TOFU feast with bubbling soup and crispy tofu" class="hero-img" id="heroFoodImg">
+          <div class="hero-floating-badge">
+            <div class="floating-badge-icon">🍲</div>
+            <div>
+              <h4 class="floating-badge-title">Chef's Signature</h4>
+              <p class="floating-badge-subtitle">Stone Pot Tofu Pepper Soup</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. OUR TOFU - FEATURED SECTION
+       ========================================================================= -->
+  <section class="featured-section" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">House Specialties</span>
+        <h2 class="section-title">Our Tofu</h2>
+        <p class="section-subtitle">
+          Handcrafted daily from pure organic soybeans. Experience the rich texture and versatile culinary magic of our signature creations.
+        </p>
+      </div>
+
+      <!-- Grid of 8 required featured dishes (Tofu Pepper Soup signature prominently featured) -->
+      <div class="featured-grid" id="featuredDishesGrid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. MENU SECTION
+       ========================================================================= -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Curated Menu</span>
+        <h2 class="section-title">Explore Our Full Menu</h2>
+        <p class="section-subtitle">
+          From steaming stone-pot stews to chewy handcrafted noodles and refreshing artisanal drinks.
+        </p>
+      </div>
+
+      <!-- Menu Category Filter & Search Bar -->
+      <div class="menu-filter-container">
+        <div class="menu-categories-bar" role="tablist" aria-label="Menu Categories">
+          <button class="menu-cat-btn active" data-category="ALL">ALL</button>
+          <button class="menu-cat-btn" data-category="TOFU">TOFU</button>
+          <button class="menu-cat-btn" data-category="RICE">RICE</button>
+          <button class="menu-cat-btn" data-category="NOODLES">NOODLES</button>
+          <button class="menu-cat-btn" data-category="SOUPS">SOUPS</button>
+          <button class="menu-cat-btn" data-category="SIDES">SIDES</button>
+          <button class="menu-cat-btn" data-category="DRINKS">DRINKS</button>
+        </div>
+
+        <div class="menu-search-wrap">
+          <span class="menu-search-icon">🔍</span>
+          <input type="text" id="menuSearchInput" class="menu-search-input" placeholder="Search dish name, ingredient, or dietary..." aria-label="Search Menu">
+        </div>
+      </div>
+
+      <!-- Menu Cards Grid -->
+      <div class="menu-items-grid" id="menuItemsGrid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+
+      <div class="menu-no-results" id="menuNoResults" style="display: none;">
+        <h3>No dishes found</h3>
+        <p>Try searching for another dish or selecting a different category tab.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. ABOUT SECTION
+       ========================================================================= -->
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-images-composition">
+        <img src="images/hero_tofu_spread.jpg" alt="Dining table with artisan tofu dishes" class="about-img-main">
+        <img src="images/tofu_pepper_soup.jpg" alt="Bubbling Tofu Pepper Soup pot" class="about-img-secondary">
+      </div>
+
+      <div class="about-content">
+        <span class="section-tag">Our Story</span>
+        <h2 class="about-title">Not Just Tofu.<br>An Everyday Culinary Art.</h2>
+        <p class="about-lead">“We believe tofu is a blank canvas for pure comfort, deep flavor, and wholesome joy.”</p>
+        <p class="about-text">
+          At <strong>JUST TOFU</strong>, we set out to prove that tofu isn't just an alternative — it's the main event. Inspired by wholesome artisanal cooking traditions, we stone-grind 100% organic non-GMO soybeans every single morning. Whether seared to a golden crisp, pan-braised in savory chili reduction, or bubbling in our legendary stone-pot pepper soup, every dish is crafted to delight.
+        </p>
+
+        <div class="about-pillars">
+          <div class="pillar-card">
+            <div class="pillar-icon">🌱</div>
+            <h4 class="pillar-title">Crafted Fresh Daily</h4>
+            <p class="pillar-desc">Stoneground in-house every morning without additives or preservatives.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🥢</div>
+            <h4 class="pillar-title">Bold Artisan Flavors</h4>
+            <p class="pillar-desc">Infused with aromatic broths, savory glazes, and toasted sesame oils.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">✨</div>
+            <h4 class="pillar-title">Warm & Cozy Ambiance</h4>
+            <p class="pillar-desc">A peaceful setting designed for connection, comfort, and mindful dining.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">💚</div>
+            <h4 class="pillar-title">Nourishing & Clean</h4>
+            <p class="pillar-desc">Packed with clean plant protein and vibrant seasonal ingredients.</p>
+          </div>
+        </div>
+
+        <a href="#reservations" class="btn btn-primary" style="align-self: flex-start;">BOOK A TABLE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. GALLERY SECTION
+       ========================================================================= -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Visual Feast</span>
+        <h2 class="section-title">The JUST TOFU Experience</h2>
+        <p class="section-subtitle">
+          Glimpse into our artisanal dishes, serene dining atmosphere, and vibrant food presentations.
+        </p>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. RESERVATIONS SECTION
+       ========================================================================= -->
+  <section class="reservations-section" id="reservations">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Table Booking</span>
+        <h2 class="section-title">Reserve Your Table</h2>
+        <p class="section-subtitle">
+          Join us for a cozy lunch, dinner gathering, or a relaxing weekend brunch. We look forward to welcoming you.
+        </p>
+      </div>
+
+      <div class="reservation-card-wrapper">
+        <form id="reservationForm" novalidate>
+          <div class="reservation-form-grid">
+            <div class="form-group">
+              <label for="resName" class="form-label">Full Name *</label>
+              <input type="text" id="resName" name="name" class="form-input" placeholder="e.g. Sarah Jenkins" required>
+            </div>
+
+            <div class="form-group">
+              <label for="resPhone" class="form-label">Phone Number *</label>
+              <input type="tel" id="resPhone" name="phone" class="form-input" placeholder="e.g. +1 (555) 349-2810" required>
+            </div>
+
+            <div class="form-group">
+              <label for="resEmail" class="form-label">Email Address *</label>
+              <input type="email" id="resEmail" name="email" class="form-input" placeholder="e.g. sarah@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="resGuests" class="form-label">Number of Guests *</label>
+              <select id="resGuests" name="guests" class="form-select" required>
+                <option value="1">1 Guest (Solo Dining)</option>
+                <option value="2" selected>2 Guests (Cozy Pair)</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests (Family / Friends)</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7+">7+ Guests (Large Party)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="resDate" class="form-label">Date *</label>
+              <input type="date" id="resDate" name="date" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="resTime" class="form-label">Preferred Time *</label>
+              <select id="resTime" name="time" class="form-select" required>
+                <option value="11:30 AM">11:30 AM (Lunch)</option>
+                <option value="12:00 PM">12:00 PM (Lunch)</option>
+                <option value="12:30 PM">12:30 PM (Lunch)</option>
+                <option value="1:00 PM">1:00 PM (Lunch)</option>
+                <option value="1:30 PM">1:30 PM (Lunch)</option>
+                <option value="5:30 PM" selected>5:30 PM (Dinner)</option>
+                <option value="6:00 PM">6:00 PM (Dinner)</option>
+                <option value="6:30 PM">6:30 PM (Dinner)</option>
+                <option value="7:00 PM">7:00 PM (Dinner)</option>
+                <option value="7:30 PM">7:30 PM (Dinner)</option>
+                <option value="8:00 PM">8:00 PM (Dinner)</option>
+                <option value="8:30 PM">8:30 PM (Late Dinner)</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="resSeating" class="form-label">Seating Preference</label>
+              <select id="resSeating" name="seating" class="form-select">
+                <option value="Main Dining Room">Main Dining Room (Warm & Lively)</option>
+                <option value="Window Nook">Window Nook (Cozy Sunlit)</option>
+                <option value="Low Table Banquette">Cozy Low Table Banquette</option>
+                <option value="Outdoor Terrace">Outdoor Garden Terrace</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="resNotes" class="form-label">Special Requests / Dietary Notes</label>
+              <textarea id="resNotes" name="special_request" class="form-textarea" placeholder="Celebrating an occasion? Dietary allergies? Let us know here..."></textarea>
+            </div>
+          </div>
+
+          <div class="reservation-submit-wrap">
+            <button type="submit" class="btn btn-book-table" id="bookTableSubmitBtn">
+              BOOK A TABLE
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. CONTACT & LOCATION SECTION
+       ========================================================================= -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Get in Touch</span>
+        <h2 class="section-title">Visit Us & Connect</h2>
+        <p class="section-subtitle">
+          Drop by for a comforting bowl, place a quick takeaway order, or chat with us on WhatsApp.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Details Card -->
+        <div class="contact-info-card">
+          <div class="contact-info-list">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <div class="contact-label">Location</div>
+                <div class="contact-val">128 Sylvan Blossom Way, Suite 400<br>Central Arts District</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">⏰</div>
+              <div>
+                <div class="contact-label">Opening Hours</div>
+                <div class="contact-val" style="margin-bottom:0.35rem;">Mon &ndash; Sun: 11:30 AM &ndash; 10:00 PM</div>
+                <span class="live-status-badge">
+                  <span class="status-dot online"></span> Open Now &bull; Closes 10:00 PM
+                </span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <div class="contact-label">Phone & Inquiries</div>
+                <div class="contact-val"><a href="tel:+15558638638" style="color:var(--color-primary);">+1 (555) 863-TOFU</a></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">💬</div>
+              <div>
+                <div class="contact-label">WhatsApp Direct</div>
+                <div class="contact-val"><a href="https://wa.me/15558638638" target="_blank" rel="noopener" style="color:var(--color-accent);">+1 (555) 863-8638 (Fast Response)</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-social-links">
+            <a href="https://wa.me/15558638638" target="_blank" rel="noopener" class="social-btn whatsapp-btn">
+              <span>💬 WhatsApp</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn instagram-btn">
+              <span>📷 @justtofu.kitchen</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Stylized Map Embed -->
+        <div class="contact-map-card">
+          <iframe 
+            class="map-embed"
+            title="JUST TOFU Restaurant Location Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0192837380967!2d-122.42067968468205!3d37.77492997975903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sHayes%20Valley%2C%20San%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus"
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-wrap">
+          <a href="#home" class="brand-logo">
+            <img src="images/logo.png" alt="JUST TOFU Logo" class="brand-logo-img">
+            <div class="brand-logo-text">
+              <span class="brand-name">JUST TOFU</span>
+              <span class="brand-tagline-sub">FRESH &bull; DELICIOUS &bull; NOURISHING</span>
+            </div>
+          </a>
+          <p class="footer-tagline">“This isn't just tofu. This is JUST TOFU.”</p>
+          <p class="footer-desc">
+            Organic, handcrafted artisanal tofu kitchen. Fresh, delicious, nourishing comfort in every bite.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="#home" class="footer-link">Home</a>
+            <a href="#featured" class="footer-link">Our Tofu</a>
+            <a href="#menu" class="footer-link">Full Menu</a>
+            <a href="#about" class="footer-link">Our Story</a>
+            <a href="#gallery" class="footer-link">Photo Gallery</a>
+            <a href="#reservations" class="footer-link">Reservations</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Hours</h4>
+          <div class="footer-hours-list">
+            <div><strong>Monday &ndash; Friday</strong><br>11:30 AM &ndash; 10:00 PM</div>
+            <div><strong>Saturday &ndash; Sunday</strong><br>11:00 AM &ndash; 10:30 PM</div>
+            <div style="margin-top:0.4rem; color:var(--color-gold);">* Kitchen closes 30m prior</div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Stay Connected</h4>
+          <p class="footer-desc" style="margin-bottom:1rem;">Follow our daily fresh soy batches and culinary specials.</p>
+          <div class="footer-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">📷 Instagram: @justtofu.kitchen</a>
+            <a href="https://wa.me/15558638638" target="_blank" rel="noopener" class="footer-link">💬 WhatsApp: +1 (555) 863-8638</a>
+            <a href="tel:+15558638638" class="footer-link">📞 Phone: +1 (555) 863-TOFU</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 JUST TOFU. All rights reserved. Crafted with care and organic soybeans.</div>
+        <div style="display:flex; gap:1.25rem;">
+          <a href="#home" class="footer-link">Privacy Policy</a>
+          <a href="#home" class="footer-link">Terms of Service</a>
+          <a href="#reservations" class="footer-link">Book a Table</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. CART SLIDE-OVER DRAWER
+       ========================================================================= -->
+  <div class="cart-drawer" id="cartDrawer" aria-label="Your Food Order Cart">
+    <div class="cart-header">
+      <h3 class="cart-title">
+        <span>🛒</span> Your Order
+      </h3>
+      <button class="cart-close-btn" data-action="close-cart" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-body">
+      <!-- Empty Cart State -->
+      <div class="empty-cart-state" id="emptyCartState">
+        <div class="empty-cart-icon">🥢</div>
+        <h4 class="empty-cart-text">Your order is empty</h4>
+        <p class="empty-cart-sub">Explore our menu and add your favorite fresh tofu dishes to get started.</p>
+        <button class="btn btn-outline" data-action="close-cart" onclick="location.href='#menu'">Browse Menu</button>
+      </div>
+
+      <!-- Items List -->
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Rendered dynamically by js/cart.js -->
+      </div>
+    </div>
+
+    <!-- Summary & Checkout Footer -->
+    <div class="cart-footer" id="cartSummaryState" style="display: none;">
+      <div class="cart-totals-breakdown">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="totals-row">
+          <span>Estimated Tax (8%)</span>
+          <span id="cartTax">$0.00</span>
+        </div>
+        <div class="totals-row" id="cartDeliveryRow" style="display:none;">
+          <span>Delivery Fee</span>
+          <span id="cartDelivery">$3.50</span>
+        </div>
+        <div class="totals-row grand-total-row">
+          <span>Total</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+      </div>
+
+      <button class="btn btn-checkout" id="proceedToCheckoutBtn">
+        Proceed to Checkout &rarr;
+      </button>
+    </div>
+  </div>
+
+  <div class="overlay-backdrop" id="cartOverlay"></div>
+
+  <!-- =========================================================================
+       11. DISH DETAILS MODAL
+       ========================================================================= -->
+  <div class="modal-wrapper" id="dishDetailModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close-btn" data-action="close-dish-modal" aria-label="Close dish details">&times;</button>
+      <img src="images/tofu_pepper_soup.jpg" alt="Dish Preview" id="modalDishImg" class="dish-modal-img">
+      <div class="dish-modal-body">
+        <div class="dish-modal-header">
+          <h3 id="modalDishTitle" style="font-size: 1.5rem;">Dish Name</h3>
+          <span id="modalDishPrice" class="dish-modal-price">$0.00</span>
+        </div>
+        <p id="modalDishDesc" class="dish-modal-desc">Detailed dish description goes here.</p>
+
+        <div class="dish-modal-meta">
+          <div id="modalDishDietary" class="dietary-pills"></div>
+          <div id="modalDishSpice"></div>
+        </div>
+
+        <div style="font-size:0.8125rem; color:var(--text-light); margin-bottom:1.25rem;" id="modalDishCalories"></div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="modalSpecialNotes" class="form-label">Special Cooking Instructions (Optional)</label>
+          <input type="text" id="modalSpecialNotes" class="form-input" placeholder="e.g. Extra scallions, less chili oil, allergy alert...">
+        </div>
+
+        <div class="dish-modal-actions">
+          <div class="qty-stepper" style="padding: 6px 12px;">
+            <button class="qty-btn" id="modalQtyDec">−</button>
+            <span class="qty-val" id="modalDishQty" style="font-size: 1rem; min-width: 24px;">1</span>
+            <button class="qty-btn" id="modalQtyInc">+</button>
+          </div>
+
+          <button class="btn btn-accent" id="modalAddToCartBtn" style="flex-grow: 1;">
+            <span>Add to Order</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       12. CHECKOUT MODAL
+       ========================================================================= -->
+  <div class="modal-wrapper" id="checkoutModal">
+    <div class="modal-backdrop" onclick="window.cart.closeCheckoutModal()"></div>
+    <div class="modal-card checkout-modal-card">
+      <button class="modal-close-btn" onclick="window.cart.closeCheckoutModal()" aria-label="Close checkout">&times;</button>
+      <div class="checkout-header">
+        <span class="section-tag">Online Checkout</span>
+        <h3 style="font-size: 1.65rem; margin-top:0.4rem;">Complete Your Order</h3>
+      </div>
+
+      <!-- Order Type Selector -->
+      <div class="order-type-tabs">
+        <button type="button" class="order-type-tab active" data-type="takeaway">🛍️ Takeaway</button>
+        <button type="button" class="order-type-tab" data-type="dinein">🍽️ Dine-In</button>
+        <button type="button" class="order-type-tab" data-type="delivery">🛵 Delivery</button>
+      </div>
+
+      <!-- Order Summary Preview -->
+      <div class="checkout-summary-box">
+        <div class="checkout-summary-list" id="checkoutSummaryList"></div>
+        <div id="checkoutSummaryTotals"></div>
+      </div>
+
+      <!-- Checkout Form -->
+      <form id="checkoutForm">
+        <div class="reservation-form-grid" style="gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="form-group">
+            <label class="form-label" for="custName">Your Name *</label>
+            <input type="text" id="custName" name="customerName" class="form-input" placeholder="e.g. Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="custPhone">Phone Number *</label>
+            <input type="tel" id="custPhone" name="customerPhone" class="form-input" placeholder="e.g. (555) 123-4567" required>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="custEmail">Email for Order Receipt *</label>
+            <input type="email" id="custEmail" name="customerEmail" class="form-input" placeholder="e.g. jane@example.com" required>
+          </div>
+
+          <div class="form-group full-width" id="deliveryAddressGroup" style="display: none;">
+            <label class="form-label" for="custAddress">Delivery Address *</label>
+            <input type="text" id="custAddress" name="deliveryAddress" class="form-input" placeholder="Street Address, Apt / Suite #">
+          </div>
+
+          <div class="form-group full-width" id="tableNumberGroup" style="display: none;">
+            <label class="form-label" for="custTableNum">Table Number (If seated)</label>
+            <input type="text" id="custTableNum" name="tableNumber" class="form-input" placeholder="e.g. Table 04">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="payMethod">Payment Simulation Method</label>
+            <select id="payMethod" name="paymentMethod" class="form-select">
+              <option value="Credit / Debit Card">💳 Credit / Debit Card</option>
+              <option value="Apple Pay / Google Pay">📱 Apple Pay / Google Pay</option>
+              <option value="Pay upon Pick-Up">💵 Pay upon Pick-Up / Dine-In</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="orderNotes">Order Notes</label>
+            <input type="text" id="orderNotes" name="orderNotes" class="form-input" placeholder="e.g. Utensils included, leave at door...">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-accent" style="width: 100%; padding: 0.9rem;">
+          Place Order &bull; Send to Kitchen 🥢
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       13. ORDER SUCCESS / RECEIPT MODAL
+       ========================================================================= -->
+  <div class="modal-wrapper" id="orderSuccessModal">
+    <div class="modal-backdrop" onclick="document.getElementById('orderSuccessModal').classList.remove('active'); document.body.style.overflow='';"></div>
+    <div class="modal-card receipt-modal-card">
+      <div class="success-check-icon">✓</div>
+      <h3 style="font-size: 1.5rem; color: var(--color-primary);">Order Confirmed!</h3>
+      <p style="font-size: 0.875rem; color: var(--text-muted);">Thank you for dining with JUST TOFU. Your order is being freshly prepared.</p>
+
+      <div class="receipt-ticket">
+        <div style="text-align: center; font-weight: 700; font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">
+          JUST TOFU <span id="receiptOrderNumber">#JT-000000</span>
+        </div>
+        <div id="receiptDetails" style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-color);"></div>
+        <div id="receiptItems" style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-color);"></div>
+        <div id="receiptTotal"></div>
+      </div>
+
+      <button class="btn btn-primary" onclick="document.getElementById('orderSuccessModal').classList.remove('active'); document.body.style.overflow='';" style="width: 100%;">
+        Done &amp; Return to Menu
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       14. RESERVATION CONFIRMATION MODAL
+       ========================================================================= -->
+  <div class="modal-wrapper" id="reservationModal">
+    <div class="modal-backdrop" data-action="close-reservation-modal"></div>
+    <div class="modal-card receipt-modal-card">
+      <div class="success-check-icon" style="background:#FEF3C7; color:#D97706;">📅</div>
+      <h3 style="font-size: 1.5rem; color: var(--color-primary);">Table Reserved!</h3>
+      <p style="font-size: 0.875rem; color: var(--text-muted);">We have reserved your table. A confirmation SMS/Email has been dispatched.</p>
+
+      <div class="receipt-ticket">
+        <div style="text-align: center; font-weight: 700; font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">
+          Reservation Code: <span id="resModalCode">#TBL-00000</span>
+        </div>
+        <div class="receipt-row"><span>Guest Name:</span><strong id="resModalGuestName">-</strong></div>
+        <div class="receipt-row"><span>Date &amp; Time:</span><strong id="resModalDateTime">-</strong></div>
+        <div class="receipt-row"><span>Party Size:</span><strong id="resModalGuests">-</strong></div>
+        <div class="receipt-row"><span>Seating:</span><strong id="resModalSeating">-</strong></div>
+        <div class="receipt-row" style="margin-top:0.4rem; padding-top:0.4rem; border-top:1px dashed var(--border-color);">
+          <span>Requests:</span><span id="resModalRequests" style="font-size:0.8125rem; color:var(--text-muted);">-</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" data-action="close-reservation-modal" style="width: 100%;">
+        Great, See You Soon!
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       15. GALLERY LIGHTBOX MODAL
+       ========================================================================= -->
+  <div class="lightbox-modal" id="galleryLightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" data-action="close-lightbox" aria-label="Close Lightbox">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrevBtn" aria-label="Previous image">&#10094;</button>
+      <button class="lightbox-nav-btn lightbox-next" id="lightboxNextBtn" aria-label="Next image">&#10095;</button>
+
+      <div class="lightbox-img-wrap">
+        <img src="images/tofu_pepper_soup.jpg" alt="Gallery View" id="lightboxImg" class="lightbox-img">
+      </div>
+      <div class="lightbox-caption">
+        <h4 id="lightboxTitle">Title</h4>
+        <p id="lightboxSubtitle">Subtitle</p>
+        <span id="lightboxCounter" style="font-size: 0.8125rem; color: var(--color-gold); margin-top: 0.25rem; display: block;">1 / 8</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/menu-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/reservations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
