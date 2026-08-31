@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect, useState } from "react";
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -44,6 +44,9 @@ export function CartProvider({ children }) {
     }
   });
 
+  const [toasts, setToasts] = useState([]);
+  const [badgePulse, setBadgePulse] = useState(false);
+
   useEffect(() => {
     try {
       localStorage.setItem("justtofu_cart_v1", JSON.stringify(cartItems));
@@ -52,7 +55,21 @@ export function CartProvider({ children }) {
     }
   }, [cartItems]);
 
-  const addToCart = (item, qty = 1) => dispatch({ type: "ADD_ITEM", item, qty });
+  const showToast = (message) => {
+    const id = Date.now() + Math.random();
+    setToasts((prev) => [...prev, { id, message }]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 2800);
+  };
+
+  const addToCart = (item, qty = 1) => {
+    dispatch({ type: "ADD_ITEM", item, qty });
+    setBadgePulse(true);
+    setTimeout(() => setBadgePulse(false), 500);
+    showToast(`Added ${qty > 1 ? `${qty}× ` : ""}"${item.name}" to your order 🥢`);
+  };
+
   const removeFromCart = (id) => dispatch({ type: "REMOVE_ITEM", id });
   const updateQty = (id, qty) => dispatch({ type: "UPDATE_QTY", id, qty });
   const clearCart = () => dispatch({ type: "CLEAR_CART" });
@@ -72,13 +89,25 @@ export function CartProvider({ children }) {
         tax,
         deliveryFee,
         total,
+        badgePulse,
         addToCart,
         removeFromCart,
         updateQty,
         clearCart,
+        showToast,
       }}
     >
       {children}
+
+      {/* Floating Toast Notification Container */}
+      <div className="toast-container" id="toastContainer" aria-live="polite">
+        {toasts.map((toast) => (
+          <div key={toast.id} className="toast-message visible">
+            <span>✨</span>
+            <span>{toast.message}</span>
+          </div>
+        ))}
+      </div>
     </CartContext.Provider>
   );
 }

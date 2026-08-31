@@ -16,7 +16,7 @@ const NAV_LINKS = [
 const SECTION_IDS = NAV_LINKS.map((l) => l.href);
 
 export default function Navbar({ onOpenCart }) {
-  const { cartCount } = useCart();
+  const { cartCount, badgePulse } = useCart();
   const activeId = useScrollSpy(SECTION_IDS);
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -90,7 +90,9 @@ export default function Navbar({ onOpenCart }) {
             >
               <span>🛒</span>
               {cartCount > 0 && (
-                <span className="cart-count-badge">{cartCount}</span>
+                <span className={`cart-count-badge${badgePulse ? " pulse-anim" : ""}`}>
+                  {cartCount}
+                </span>
               )}
             </button>
 
