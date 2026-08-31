@@ -24,24 +24,27 @@ export default function FeaturedDishes() {
 
         <div className="featured-grid" id="featuredDishesGrid">
           {featuredItems.map((item) => (
-            <div
+            <article
               key={item.id}
-              className={`featured-card${item.isSignature ? " featured-signature-card" : ""}`}
+              className={`featured-card${item.isSignature ? " signature-featured-card" : ""}`}
             >
               <div
-                className="featured-card-img-wrap"
+                className="featured-image-wrap"
                 onClick={() => setSelectedDish(item)}
-                style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label={`View details for ${item.name}`}
+                onKeyDown={(e) => e.key === "Enter" && setSelectedDish(item)}
               >
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="featured-card-img"
+                  className="featured-image"
                   loading="lazy"
                 />
                 {item.badge && (
                   <span
-                    className={`featured-badge${item.isSignature ? " badge-signature" : ""}`}
+                    className={`featured-badge${item.isSignature ? " signature-badge" : ""}`}
                   >
                     {item.badge}
                   </span>
@@ -50,21 +53,31 @@ export default function FeaturedDishes() {
                   <span className="spice-tag">{"🌶️".repeat(item.spiceLevel)}</span>
                 )}
               </div>
-              <div className="featured-card-body">
-                <div className="featured-card-header">
-                  <span className="featured-card-category">{item.category}</span>
-                  <span className="featured-card-price">${item.price.toFixed(2)}</span>
+
+              <div className="featured-content">
+                <div className="featured-header">
+                  <h3
+                    className="featured-title"
+                    onClick={() => setSelectedDish(item)}
+                  >
+                    {item.name}
+                  </h3>
+                  <span className="featured-price">${item.price.toFixed(2)}</span>
                 </div>
-                <h3
-                  className="featured-card-title"
-                  onClick={() => setSelectedDish(item)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {item.name}
-                </h3>
-                <p className="featured-card-desc">{item.description}</p>
-                <div className="featured-card-footer">
+
+                <p className="featured-desc">{item.description}</p>
+
+                <div className="dietary-pills" style={{ marginBottom: "0.25rem" }}>
+                  {item.dietary.slice(0, 2).map((d) => (
+                    <span key={d} className="diet-pill">
+                      {d}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="featured-footer">
                   <button
+                    type="button"
                     className="btn btn-sm-order"
                     onClick={() => addToCart(item)}
                     title="Add to Order"
@@ -76,13 +89,15 @@ export default function FeaturedDishes() {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2.5"
+                      strokeWidth="2.5"
                     >
                       <path d="M12 5v14M5 12h14" />
                     </svg>
                   </button>
+
                   <button
-                    className="featured-info-btn"
+                    type="button"
+                    className="featured-details-link"
                     onClick={() => setSelectedDish(item)}
                     title="View Details"
                   >
@@ -90,7 +105,7 @@ export default function FeaturedDishes() {
                   </button>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
