@@ -21,16 +21,23 @@ export default function Navbar({ onOpenCart }) {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Add shadow + shrink effect on scroll
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      const headerOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
     setDrawerOpen(false);
   };
 
@@ -38,13 +45,16 @@ export default function Navbar({ onOpenCart }) {
     <>
       <header className={`site-header${scrolled ? " scrolled" : ""}`} id="mainHeader">
         <div className="container header-container">
-          {/* Logo */}
+          {/* Logo on the left */}
           <a
             href="#home"
             className="brand-logo"
             id="navLogo"
             aria-label="JUST TOFU Home"
-            onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("home");
+            }}
           >
             <img src="/images/logo.png" alt="JUST TOFU Logo" className="brand-logo-img" />
             <div className="brand-logo-text">
@@ -53,21 +63,24 @@ export default function Navbar({ onOpenCart }) {
             </div>
           </a>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation Links */}
           <nav className="nav-desktop" aria-label="Main Navigation">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={`#${link.href}`}
                 className={`nav-link${activeId === link.href ? " active" : ""}`}
-                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                }}
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Header Actions */}
+          {/* Header Actions: Cart & Order Now */}
           <div className="header-actions">
             <button
               className="cart-trigger-btn"
@@ -85,12 +98,15 @@ export default function Navbar({ onOpenCart }) {
               href="#menu"
               className="btn btn-primary"
               id="headerOrderNowBtn"
-              onClick={(e) => { e.preventDefault(); scrollToSection("menu"); }}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("menu");
+              }}
             >
               <span>ORDER NOW</span>
             </a>
 
-            {/* Hamburger */}
+            {/* Mobile Hamburger Button */}
             <button
               className="hamburger-btn"
               id="mobileMenuToggle"
@@ -106,13 +122,16 @@ export default function Navbar({ onOpenCart }) {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Menu */}
       <MobileDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         navLinks={NAV_LINKS}
         onNavigate={scrollToSection}
-        onOpenCart={() => { setDrawerOpen(false); onOpenCart(); }}
+        onOpenCart={() => {
+          setDrawerOpen(false);
+          onOpenCart();
+        }}
         cartCount={cartCount}
       />
     </>

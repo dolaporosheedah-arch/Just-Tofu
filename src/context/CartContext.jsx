@@ -1,16 +1,22 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 
-// ─── Cart Reducer ────────────────────────────────────────────────────────────
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM": {
       const existing = state.find((i) => i.id === action.item.id);
+      const addQty = action.qty || 1;
       if (existing) {
         return state.map((i) =>
-          i.id === action.item.id ? { ...i, qty: i.qty + 1 } : i
+          i.id === action.item.id
+            ? {
+                ...i,
+                qty: i.qty + addQty,
+                instructions: action.item.instructions || i.instructions,
+              }
+            : i
         );
       }
-      return [...state, { ...action.item, qty: 1 }];
+      return [...state, { ...action.item, qty: addQty }];
     }
     case "REMOVE_ITEM":
       return state.filter((i) => i.id !== action.id);
@@ -26,26 +32,27 @@ function cartReducer(state, action) {
   }
 }
 
-// ─── Context ─────────────────────────────────────────────────────────────────
 const CartContext = createContext(null);
 
-// ─── Provider ────────────────────────────────────────────────────────────────
 export function CartProvider({ children }) {
   const [cartItems, dispatch] = useReducer(cartReducer, [], () => {
     try {
-      const saved = localStorage.getItem("justTofu_cart");
+      const saved = localStorage.getItem("justtofu_cart_v1");
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
   });
 
-  // Persist cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("justTofu_cart", JSON.stringify(cartItems));
+    try {
+      localStorage.setItem("justtofu_cart_v1", JSON.stringify(cartItems));
+    } catch (e) {
+      console.error(e);
+    }
   }, [cartItems]);
 
-  const addToCart = (item) => dispatch({ type: "ADD_ITEM", item });
+  const addToCart = (item, qty = 1) => dispatch({ type: "ADD_ITEM", item, qty });
   const removeFromCart = (id) => dispatch({ type: "REMOVE_ITEM", id });
   const updateQty = (id, qty) => dispatch({ type: "UPDATE_QTY", id, qty });
   const clearCart = () => dispatch({ type: "CLEAR_CART" });
@@ -53,8 +60,8 @@ export function CartProvider({ children }) {
   const cartCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
   const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
   const tax = subtotal * 0.08;
-  const deliveryFee = cartItems.length > 0 ? 3.5 : 0;
-  const total = subtotal + tax + deliveryFee;
+  const deliveryFee = 3.5;
+  const total = subtotal + tax;
 
   return (
     <CartContext.Provider
@@ -76,7 +83,6 @@ export function CartProvider({ children }) {
   );
 }
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
 export function useCart() {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart must be used inside <CartProvider>");

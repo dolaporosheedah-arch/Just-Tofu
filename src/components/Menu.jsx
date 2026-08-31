@@ -8,7 +8,6 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDish, setSelectedDish] = useState(null);
-  const [addedIds, setAddedIds] = useState({});
 
   const filteredItems = useMemo(() => {
     return MENU_DATA.filter((item) => {
@@ -19,89 +18,64 @@ export default function Menu() {
         !q ||
         item.name.toLowerCase().includes(q) ||
         item.description.toLowerCase().includes(q) ||
-        item.tags.some((t) => t.toLowerCase().includes(q));
+        item.tags.some((t) => t.toLowerCase().includes(q)) ||
+        item.category.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
   }, [activeCategory, searchQuery]);
 
-  const handleAdd = (e, item) => {
-    e.stopPropagation();
-    addToCart(item);
-    setAddedIds((prev) => ({ ...prev, [item.id]: true }));
-    setTimeout(
-      () => setAddedIds((prev) => ({ ...prev, [item.id]: false })),
-      1200
-    );
-  };
-
   return (
-    <section className="section menu-section" id="menu">
+    <section className="menu-section" id="menu">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">Full Menu</span>
-          <h2 className="section-title">Our Complete Menu</h2>
+          <span className="section-tag">Curated Menu</span>
+          <h2 className="section-title">Explore Our Full Menu</h2>
           <p className="section-subtitle">
-            Every dish crafted fresh. Every flavour intentional.
+            From steaming stone-pot stews to chewy handcrafted noodles and refreshing artisanal drinks.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="menu-search-wrap">
-          <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            id="menuSearchInput"
-            className="menu-search"
-            placeholder="Search dishes, ingredients or tags..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search menu"
-          />
-          {searchQuery && (
-            <button
-              className="search-clear"
-              onClick={() => setSearchQuery("")}
-              aria-label="Clear search"
-            >
-              &times;
-            </button>
-          )}
-        </div>
-
-        {/* Category Filters */}
-        <div className="menu-filters" role="tablist" aria-label="Menu categories">
-          {MENU_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              role="tab"
-              aria-selected={activeCategory === cat}
-              className={`filter-btn${activeCategory === cat ? " active" : ""}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Results count */}
-        <p className="menu-results-count">
-          Showing {filteredItems.length} dish{filteredItems.length !== 1 ? "es" : ""}
-          {searchQuery ? ` for "${searchQuery}"` : ""}
-        </p>
-
-        {/* Menu Grid */}
-        {filteredItems.length > 0 ? (
-          <div className="menu-grid" id="menuGrid">
-            {filteredItems.map((item) => (
-              <article
-                key={item.id}
-                className={`menu-card${item.isSignature ? " signature" : ""}`}
-                onClick={() => setSelectedDish(item)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && setSelectedDish(item)}
+        {/* Menu Category Filter & Search Bar */}
+        <div className="menu-filter-container">
+          <div className="menu-categories-bar" role="tablist" aria-label="Menu Categories">
+            {MENU_CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                className={`menu-cat-btn${activeCategory === cat ? " active" : ""}`}
+                onClick={() => setActiveCategory(cat)}
               >
-                <div className="menu-card-img-wrap">
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="menu-search-wrap">
+            <span className="menu-search-icon">🔍</span>
+            <input
+              type="text"
+              id="menuSearchInput"
+              className="menu-search-input"
+              placeholder="Search dish name, ingredient, or dietary..."
+              aria-label="Search Menu"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Menu Cards Grid */}
+        {filteredItems.length > 0 ? (
+          <div className="menu-items-grid" id="menuItemsGrid">
+            {filteredItems.map((item) => (
+              <div
+                key={item.id}
+                className={`menu-card${item.isSignature ? " menu-signature-card" : ""}`}
+              >
+                <div
+                  className="menu-card-img-wrap"
+                  onClick={() => setSelectedDish(item)}
+                  style={{ cursor: "pointer" }}
+                >
                   <img
                     src={item.image}
                     alt={item.name}
@@ -109,45 +83,57 @@ export default function Menu() {
                     loading="lazy"
                   />
                   {item.badge && (
-                    <span className="menu-card-badge">{item.badge}</span>
+                    <span
+                      className={`menu-card-badge${item.isSignature ? " badge-signature" : ""}`}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                  {item.spiceLevel > 0 && (
+                    <span className="spice-tag">{"🌶️".repeat(item.spiceLevel)}</span>
                   )}
                 </div>
-
                 <div className="menu-card-body">
-                  <div className="menu-card-header">
-                    <h3 className="menu-card-name">{item.name}</h3>
-                    <span className="menu-card-price">${item.price.toFixed(2)}</span>
+                  <div className="menu-card-top">
+                    <span className="menu-card-category">{item.category}</span>
+                    <span className="menu-card-calories">{item.calories || ""}</span>
                   </div>
-
-                  <p className="menu-card-desc">{item.description}</p>
-
-                  <div className="menu-card-tags">
-                    {item.dietary.map((d) => (
-                      <span key={d} className="dietary-tag">{d}</span>
-                    ))}
-                  </div>
-
-                  <button
-                    className={`btn btn-add-to-cart${addedIds[item.id] ? " added" : ""}`}
-                    onClick={(e) => handleAdd(e, item)}
-                    aria-label={`Add ${item.name} to cart`}
+                  <h4
+                    className="menu-card-title"
+                    onClick={() => setSelectedDish(item)}
+                    style={{ cursor: "pointer" }}
                   >
-                    {addedIds[item.id] ? "✓ Added!" : "+ Add to Cart"}
-                  </button>
+                    {item.name}
+                  </h4>
+                  <p className="menu-card-desc">{item.description}</p>
+                  <div className="menu-card-bottom">
+                    <span className="menu-card-price">${item.price.toFixed(2)}</span>
+                    <button
+                      className="btn btn-sm-order"
+                      onClick={() => addToCart(item)}
+                      title="Add to Order"
+                    >
+                      <span>Add to Order</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                      >
+                        <path d="M12 5v14M5 12h14" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         ) : (
-          <div className="menu-empty" id="menuEmpty">
-            <span>🍃</span>
-            <p>No dishes found. Try a different search or category.</p>
-            <button
-              className="btn btn-outline"
-              onClick={() => { setSearchQuery(""); setActiveCategory("ALL"); }}
-            >
-              Clear Filters
-            </button>
+          <div className="menu-no-results" id="menuNoResults">
+            <h3>No dishes found</h3>
+            <p>Try searching for another dish or selecting a different category tab.</p>
           </div>
         )}
       </div>

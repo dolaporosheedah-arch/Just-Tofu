@@ -1,254 +1,253 @@
 import { useState } from "react";
 
-const PARTY_SIZES = ["1–2 Guests", "3–4 Guests", "5–6 Guests", "7+ Guests"];
-const SEATING = ["Classic Table", "Cozy Low Table Banquette", "Counter Bar"];
-
-function generateCode() {
-  return "#TBL-" + Math.floor(10000 + Math.random() * 90000);
-}
-
-function getTodayString() {
-  return new Date().toISOString().split("T")[0];
-}
-
 export default function Reservations() {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
+    email: "",
+    guests: "2",
     date: "",
-    time: "",
-    partySize: "",
-    seating: "",
-    requests: "",
+    time: "5:30 PM",
+    seating: "Main Dining Room",
+    special_request: "",
   });
-  const [errors, setErrors] = useState({});
+
   const [confirmation, setConfirmation] = useState(null);
-
-  const validate = () => {
-    const errs = {};
-    if (!form.name.trim()) errs.name = "Name is required.";
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email))
-      errs.email = "Valid email required.";
-    if (!form.date) errs.date = "Please select a date.";
-    if (!form.time) errs.time = "Please select a time.";
-    if (!form.partySize) errs.partySize = "Please select party size.";
-    return errs;
-  };
-
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
+    if (!formData.name || !formData.email || !formData.date) {
+      alert("Please fill in your name, email and reservation date.");
       return;
     }
+    const code = "#TBL-" + Math.floor(10000 + Math.random() * 90000);
     setConfirmation({
-      code: generateCode(),
-      ...form,
+      ...formData,
+      code,
     });
   };
 
-  const resetForm = () => {
-    setForm({ name: "", email: "", phone: "", date: "", time: "", partySize: "", seating: "", requests: "" });
-    setErrors({});
-    setConfirmation(null);
-  };
-
   return (
-    <section className="section reservations-section" id="reservations">
+    <section className="reservations-section" id="reservations">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">Book a Table</span>
-          <h2 className="section-title">Reservations</h2>
+          <span className="section-tag">Table Booking</span>
+          <h2 className="section-title">Reserve Your Table</h2>
           <p className="section-subtitle">
-            Reserve your spot and let us take care of the rest.
+            Join us for a cozy lunch, dinner gathering, or a relaxing weekend brunch. We look forward to welcoming you.
           </p>
         </div>
 
-        <div className="reservations-layout">
-          {/* Info Panel */}
-          <div className="reservations-info">
-            <div className="res-info-card">
-              <h3>Opening Hours</h3>
-              <ul className="hours-list">
-                <li><span>Monday – Friday</span><span>11:30 AM – 10:00 PM</span></li>
-                <li><span>Saturday</span><span>11:00 AM – 10:30 PM</span></li>
-                <li><span>Sunday</span><span>11:00 AM – 9:00 PM</span></li>
-              </ul>
-            </div>
-            <div className="res-info-card">
-              <h3>Good to Know</h3>
-              <ul className="res-notes">
-                <li>🕐 Reservations held for 15 minutes</li>
-                <li>🎂 Birthday arrangements available on request</li>
-                <li>🌿 Full vegan menu available</li>
-                <li>📞 Call us: (012) 345-6789</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Form or Confirmation */}
-          <div className="reservations-form-wrap">
-            {confirmation ? (
-              <div className="reservation-confirmation">
-                <div className="confirmation-icon">✅</div>
-                <h3>Reservation Confirmed!</h3>
-                <p className="confirmation-code">
-                  Your booking code: <strong>{confirmation.code}</strong>
-                </p>
-                <p>
-                  Thank you, <strong>{confirmation.name}</strong>! We&apos;ve reserved a table
-                  for <strong>{confirmation.partySize}</strong> on{" "}
-                  <strong>{confirmation.date}</strong> at{" "}
-                  <strong>{confirmation.time}</strong>.
-                </p>
-                <p className="confirmation-note">
-                  A confirmation will be sent to{" "}
-                  <strong>{confirmation.email}</strong>. We look forward to
-                  welcoming you!
-                </p>
-                <button className="btn btn-primary" onClick={resetForm}>
-                  Make Another Reservation
-                </button>
+        <div className="reservation-card-wrapper">
+          <form id="reservationForm" onSubmit={handleSubmit} noValidate>
+            <div className="reservation-form-grid">
+              <div className="form-group">
+                <label htmlFor="resName" className="form-label">Full Name *</label>
+                <input
+                  type="text"
+                  id="resName"
+                  name="name"
+                  className="form-input"
+                  placeholder="e.g. Sarah Jenkins"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
               </div>
-            ) : (
-              <form
-                className="reservation-form"
-                id="reservationForm"
-                onSubmit={handleSubmit}
-                noValidate
-              >
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="res-name">Full Name *</label>
-                    <input
-                      id="res-name"
-                      name="name"
-                      type="text"
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      className={errors.name ? "error" : ""}
-                    />
-                    {errors.name && <span className="form-error">{errors.name}</span>}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="res-email">Email Address *</label>
-                    <input
-                      id="res-email"
-                      name="email"
-                      type="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="your@email.com"
-                      className={errors.email ? "error" : ""}
-                    />
-                    {errors.email && <span className="form-error">{errors.email}</span>}
-                  </div>
-                </div>
 
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="res-phone">Phone Number</label>
-                    <input
-                      id="res-phone"
-                      name="phone"
-                      type="tel"
-                      value={form.phone}
-                      onChange={handleChange}
-                      placeholder="+1 (000) 000-0000"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="res-partySize">Party Size *</label>
-                    <select
-                      id="res-partySize"
-                      name="partySize"
-                      value={form.partySize}
-                      onChange={handleChange}
-                      className={errors.partySize ? "error" : ""}
-                    >
-                      <option value="">Select party size</option>
-                      {PARTY_SIZES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                    {errors.partySize && <span className="form-error">{errors.partySize}</span>}
-                  </div>
-                </div>
+              <div className="form-group">
+                <label htmlFor="resPhone" className="form-label">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="resPhone"
+                  name="phone"
+                  className="form-input"
+                  placeholder="e.g. +1 (555) 349-2810"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                />
+              </div>
 
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="res-date">Date *</label>
-                    <input
-                      id="res-date"
-                      name="date"
-                      type="date"
-                      min={getTodayString()}
-                      value={form.date}
-                      onChange={handleChange}
-                      className={errors.date ? "error" : ""}
-                    />
-                    {errors.date && <span className="form-error">{errors.date}</span>}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="res-time">Time *</label>
-                    <input
-                      id="res-time"
-                      name="time"
-                      type="time"
-                      min="11:30"
-                      max="21:30"
-                      value={form.time}
-                      onChange={handleChange}
-                      className={errors.time ? "error" : ""}
-                    />
-                    {errors.time && <span className="form-error">{errors.time}</span>}
-                  </div>
-                </div>
+              <div className="form-group">
+                <label htmlFor="resEmail" className="form-label">Email Address *</label>
+                <input
+                  type="email"
+                  id="resEmail"
+                  name="email"
+                  className="form-input"
+                  placeholder="e.g. sarah@example.com"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="res-seating">Seating Preference</label>
-                  <select
-                    id="res-seating"
-                    name="seating"
-                    value={form.seating}
-                    onChange={handleChange}
-                  >
-                    <option value="">No preference</option>
-                    {SEATING.map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                </div>
+              <div className="form-group">
+                <label htmlFor="resGuests" className="form-label">Number of Guests *</label>
+                <select
+                  id="resGuests"
+                  name="guests"
+                  className="form-select"
+                  required
+                  value={formData.guests}
+                  onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                >
+                  <option value="1">1 Guest (Solo Dining)</option>
+                  <option value="2">2 Guests (Cozy Pair)</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests (Family / Friends)</option>
+                  <option value="5">5 Guests</option>
+                  <option value="6">6 Guests</option>
+                  <option value="7+">7+ Guests (Large Party)</option>
+                </select>
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="res-requests">Special Requests</label>
-                  <textarea
-                    id="res-requests"
-                    name="requests"
-                    value={form.requests}
-                    onChange={handleChange}
-                    placeholder="Dietary requirements, celebrations, accessibility needs..."
-                    rows={3}
-                  />
-                </div>
+              <div className="form-group">
+                <label htmlFor="resDate" className="form-label">Date *</label>
+                <input
+                  type="date"
+                  id="resDate"
+                  name="date"
+                  className="form-input"
+                  required
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                />
+              </div>
 
-                <button type="submit" className="btn btn-primary btn-block" id="submitReservationBtn">
-                  <span>📅</span>
-                  <span>Confirm Reservation</span>
-                </button>
-              </form>
-            )}
-          </div>
+              <div className="form-group">
+                <label htmlFor="resTime" className="form-label">Preferred Time *</label>
+                <select
+                  id="resTime"
+                  name="time"
+                  className="form-select"
+                  required
+                  value={formData.time}
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                >
+                  <option value="11:30 AM">11:30 AM (Lunch)</option>
+                  <option value="12:00 PM">12:00 PM (Lunch)</option>
+                  <option value="12:30 PM">12:30 PM (Lunch)</option>
+                  <option value="1:00 PM">1:00 PM (Lunch)</option>
+                  <option value="1:30 PM">1:30 PM (Lunch)</option>
+                  <option value="5:30 PM">5:30 PM (Dinner)</option>
+                  <option value="6:00 PM">6:00 PM (Dinner)</option>
+                  <option value="6:30 PM">6:30 PM (Dinner)</option>
+                  <option value="7:00 PM">7:00 PM (Dinner)</option>
+                  <option value="7:30 PM">7:30 PM (Dinner)</option>
+                  <option value="8:00 PM">8:00 PM (Dinner)</option>
+                  <option value="8:30 PM">8:30 PM (Late Dinner)</option>
+                </select>
+              </div>
+
+              <div className="form-group full-width">
+                <label htmlFor="resSeating" className="form-label">Seating Preference</label>
+                <select
+                  id="resSeating"
+                  name="seating"
+                  className="form-select"
+                  value={formData.seating}
+                  onChange={(e) => setFormData({ ...formData, seating: e.target.value })}
+                >
+                  <option value="Main Dining Room">Main Dining Room (Warm &amp; Lively)</option>
+                  <option value="Window Nook">Window Nook (Cozy Sunlit)</option>
+                  <option value="Low Table Banquette">Cozy Low Table Banquette</option>
+                  <option value="Outdoor Terrace">Outdoor Garden Terrace</option>
+                </select>
+              </div>
+
+              <div className="form-group full-width">
+                <label htmlFor="resNotes" className="form-label">Special Requests / Dietary Notes</label>
+                <textarea
+                  id="resNotes"
+                  name="special_request"
+                  className="form-textarea"
+                  placeholder="Celebrating an occasion? Dietary allergies? Let us know here..."
+                  value={formData.special_request}
+                  onChange={(e) => setFormData({ ...formData, special_request: e.target.value })}
+                ></textarea>
+              </div>
+            </div>
+
+            <div className="reservation-submit-wrap">
+              <button type="submit" className="btn btn-book-table" id="bookTableSubmitBtn">
+                BOOK A TABLE
+              </button>
+            </div>
+          </form>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {confirmation && (
+        <div className="modal-wrapper active" id="reservationModal">
+          <div className="modal-backdrop" onClick={() => setConfirmation(null)}></div>
+          <div className="modal-card receipt-modal-card">
+            <div className="success-check-icon" style={{ background: "#FEF3C7", color: "#D97706" }}>
+              📅
+            </div>
+            <h3 style={{ fontSize: "1.5rem", color: "var(--color-primary)" }}>Table Reserved!</h3>
+            <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
+              We have reserved your table. A confirmation SMS/Email has been dispatched.
+            </p>
+
+            <div className="receipt-ticket">
+              <div
+                style={{
+                  textAlign: "center",
+                  fontWeight: 700,
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "1.25rem",
+                  marginBottom: "0.75rem",
+                  color: "var(--color-primary)",
+                }}
+              >
+                Reservation Code: <span>{confirmation.code}</span>
+              </div>
+              <div className="receipt-row">
+                <span>Guest Name:</span>
+                <strong>{confirmation.name}</strong>
+              </div>
+              <div className="receipt-row">
+                <span>Date &amp; Time:</span>
+                <strong>{confirmation.date} at {confirmation.time}</strong>
+              </div>
+              <div className="receipt-row">
+                <span>Party Size:</span>
+                <strong>{confirmation.guests} Guests</strong>
+              </div>
+              <div className="receipt-row">
+                <span>Seating:</span>
+                <strong>{confirmation.seating}</strong>
+              </div>
+              {confirmation.special_request && (
+                <div
+                  className="receipt-row"
+                  style={{
+                    marginTop: "0.4rem",
+                    paddingTop: "0.4rem",
+                    borderTop: "1px dashed var(--border-color)",
+                  }}
+                >
+                  <span>Requests:</span>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--text-muted)" }}>
+                    {confirmation.special_request}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <button
+              className="btn btn-primary"
+              onClick={() => setConfirmation(null)}
+              style={{ width: "100%" }}
+            >
+              Great, See You Soon!
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

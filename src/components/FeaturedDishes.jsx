@@ -3,99 +3,94 @@ import { MENU_DATA, FEATURED_IDS } from "../data/menuData";
 import { useCart } from "../context/CartContext";
 import DishModal from "./ui/DishModal";
 
-const featuredItems = MENU_DATA.filter((item) => FEATURED_IDS.includes(item.id));
-
-function SpiceIndicator({ level }) {
-  return (
-    <div className="spice-indicator" aria-label={`Spice level ${level} of 3`}>
-      {[1, 2, 3].map((i) => (
-        <span key={i} className={`spice-dot${i <= level ? " active" : ""}`} />
-      ))}
-    </div>
-  );
-}
-
-function DishCard({ item, onOpenModal }) {
-  const { addToCart } = useCart();
-  const [added, setAdded] = useState(false);
-
-  const handleAdd = (e) => {
-    e.stopPropagation();
-    addToCart(item);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1200);
-  };
-
-  return (
-    <article
-      className={`dish-card${item.isSignature ? " signature" : ""}`}
-      onClick={() => onOpenModal(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onOpenModal(item)}
-    >
-      <div className="dish-card-image-wrap">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="dish-card-image"
-          loading="lazy"
-        />
-        <div className="dish-card-overlay" />
-        {item.badge && <span className="dish-badge">{item.badge}</span>}
-        <div className="dish-card-tags">
-          {item.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="dish-tag">{tag}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="dish-card-body">
-        <h3 className="dish-name">{item.name}</h3>
-        <p className="dish-desc">{item.description}</p>
-
-        <div className="dish-meta">
-          <span className="dish-calories">{item.calories}</span>
-          {item.spiceLevel > 0 && <SpiceIndicator level={item.spiceLevel} />}
-        </div>
-
-        <div className="dish-footer">
-          <span className="dish-price">${item.price.toFixed(2)}</span>
-          <button
-            className={`btn btn-add-to-cart${added ? " added" : ""}`}
-            onClick={handleAdd}
-            aria-label={`Add ${item.name} to cart`}
-          >
-            {added ? "✓ Added!" : "+ Add to Cart"}
-          </button>
-        </div>
-      </div>
-    </article>
-  );
-}
+const featuredItems = FEATURED_IDS.map((id) =>
+  MENU_DATA.find((item) => item.id === id)
+).filter(Boolean);
 
 export default function FeaturedDishes() {
+  const { addToCart } = useCart();
   const [selectedDish, setSelectedDish] = useState(null);
 
   return (
-    <section className="section featured-section" id="featured">
+    <section className="featured-section" id="featured">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">Our Tofu</span>
-          <h2 className="section-title">Featured Dishes</h2>
+          <span className="section-tag">House Specialties</span>
+          <h2 className="section-title">Our Tofu</h2>
           <p className="section-subtitle">
-            Handcrafted with care. Each dish tells the story of our passion for
-            pure, artisanal tofu.
+            Handcrafted daily from pure organic soybeans. Experience the rich texture and versatile culinary magic of our signature creations.
           </p>
         </div>
 
-        <div className="dishes-grid" id="featuredGrid">
+        <div className="featured-grid" id="featuredDishesGrid">
           {featuredItems.map((item) => (
-            <DishCard
+            <div
               key={item.id}
-              item={item}
-              onOpenModal={setSelectedDish}
-            />
+              className={`featured-card${item.isSignature ? " featured-signature-card" : ""}`}
+            >
+              <div
+                className="featured-card-img-wrap"
+                onClick={() => setSelectedDish(item)}
+                style={{ cursor: "pointer" }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="featured-card-img"
+                  loading="lazy"
+                />
+                {item.badge && (
+                  <span
+                    className={`featured-badge${item.isSignature ? " badge-signature" : ""}`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+                {item.spiceLevel > 0 && (
+                  <span className="spice-tag">{"🌶️".repeat(item.spiceLevel)}</span>
+                )}
+              </div>
+              <div className="featured-card-body">
+                <div className="featured-card-header">
+                  <span className="featured-card-category">{item.category}</span>
+                  <span className="featured-card-price">${item.price.toFixed(2)}</span>
+                </div>
+                <h3
+                  className="featured-card-title"
+                  onClick={() => setSelectedDish(item)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {item.name}
+                </h3>
+                <p className="featured-card-desc">{item.description}</p>
+                <div className="featured-card-footer">
+                  <button
+                    className="btn btn-sm-order"
+                    onClick={() => addToCart(item)}
+                    title="Add to Order"
+                  >
+                    <span>Add to Order</span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </button>
+                  <button
+                    className="featured-info-btn"
+                    onClick={() => setSelectedDish(item)}
+                    title="View Details"
+                  >
+                    Details &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

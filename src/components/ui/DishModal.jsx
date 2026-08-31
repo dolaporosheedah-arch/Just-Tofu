@@ -1,94 +1,122 @@
+import { useState } from "react";
 import { useCart } from "../../context/CartContext";
-
-function SpiceDots({ level }) {
-  return (
-    <span className="spice-indicator">
-      {[1, 2, 3].map((i) => (
-        <span key={i} className={`spice-dot${i <= level ? " active" : ""}`} />
-      ))}
-    </span>
-  );
-}
 
 export default function DishModal({ dish, onClose }) {
   const { addToCart } = useCart();
+  const [modalQty, setModalQty] = useState(1);
+  const [instructions, setInstructions] = useState("");
 
   const handleAdd = () => {
-    addToCart(dish);
+    addToCart({ ...dish, instructions }, modalQty);
     onClose();
   };
 
   return (
-    <div
-      className="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-label={dish.name}
-      onClick={onClose}
-    >
-      <div
-        className="dish-modal"
-        id="dishModal"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="modal-wrapper active" id="dishDetailModal">
+      <div className="modal-backdrop" onClick={onClose}></div>
+      <div className="modal-card">
         <button
-          className="modal-close"
+          className="modal-close-btn"
           onClick={onClose}
-          aria-label="Close dish detail"
+          aria-label="Close dish details"
         >
           &times;
         </button>
-
-        <div className="dish-modal-image-wrap">
-          <img src={dish.image} alt={dish.name} className="dish-modal-image" />
-          {dish.badge && <span className="dish-badge">{dish.badge}</span>}
-        </div>
-
+        <img
+          src={dish.image}
+          alt={dish.name}
+          id="modalDishImg"
+          className="dish-modal-img"
+        />
         <div className="dish-modal-body">
           <div className="dish-modal-header">
-            <h2 className="dish-modal-name">{dish.name}</h2>
-            <span className="dish-modal-price">${dish.price.toFixed(2)}</span>
+            <h3 id="modalDishTitle" style={{ fontSize: "1.5rem" }}>
+              {dish.name}
+            </h3>
+            <span id="modalDishPrice" className="dish-modal-price">
+              ${dish.price.toFixed(2)}
+            </span>
           </div>
-
-          <p className="dish-modal-desc">{dish.description}</p>
+          <p id="modalDishDesc" className="dish-modal-desc">
+            {dish.description}
+          </p>
 
           <div className="dish-modal-meta">
-            <div className="modal-meta-item">
-              <span className="meta-label">Calories</span>
-              <span className="meta-value">{dish.calories}</span>
+            <div id="modalDishDietary" className="dietary-pills">
+              {dish.dietary.map((d) => (
+                <span key={d} className="diet-pill">
+                  {d}
+                </span>
+              ))}
             </div>
-            {dish.spiceLevel > 0 && (
-              <div className="modal-meta-item">
-                <span className="meta-label">Spice</span>
-                <SpiceDots level={dish.spiceLevel} />
-              </div>
-            )}
-            <div className="modal-meta-item">
-              <span className="meta-label">Category</span>
-              <span className="meta-value">{dish.category}</span>
+            <div id="modalDishSpice">
+              {dish.spiceLevel > 0 ? (
+                <span>
+                  Spice Level: <strong>{"🌶️".repeat(dish.spiceLevel)}</strong>
+                </span>
+              ) : (
+                <span>Mild &amp; Gentle</span>
+              )}
             </div>
           </div>
 
-          <div className="dish-modal-dietary">
-            {dish.dietary.map((d) => (
-              <span key={d} className="dietary-tag">{d}</span>
-            ))}
-          </div>
-
-          <div className="dish-modal-tags">
-            {dish.tags.map((tag) => (
-              <span key={tag} className="dish-tag">{tag}</span>
-            ))}
-          </div>
-
-          <button
-            className="btn btn-primary btn-block"
-            id="modalAddToCartBtn"
-            onClick={handleAdd}
+          <div
+            style={{
+              fontSize: "0.8125rem",
+              color: "var(--text-light)",
+              marginBottom: "1.25rem",
+            }}
+            id="modalDishCalories"
           >
-            <span>🛒</span>
-            <span>Add to Cart — ${dish.price.toFixed(2)}</span>
-          </button>
+            {dish.calories || "Crafted with organic soybeans"}
+          </div>
+
+          <div className="form-group" style={{ marginBottom: "1.25rem" }}>
+            <label htmlFor="modalSpecialNotes" className="form-label">
+              Special Cooking Instructions (Optional)
+            </label>
+            <input
+              type="text"
+              id="modalSpecialNotes"
+              className="form-input"
+              placeholder="e.g. Extra scallions, less chili oil, allergy alert..."
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+            />
+          </div>
+
+          <div className="dish-modal-actions">
+            <div className="qty-stepper" style={{ padding: "6px 12px" }}>
+              <button
+                className="qty-btn"
+                onClick={() => setModalQty((q) => (q > 1 ? q - 1 : 1))}
+              >
+                −
+              </button>
+              <span
+                className="qty-val"
+                id="modalDishQty"
+                style={{ fontSize: "1rem", minWidth: "24px" }}
+              >
+                {modalQty}
+              </span>
+              <button
+                className="qty-btn"
+                onClick={() => setModalQty((q) => q + 1)}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              className="btn btn-accent"
+              id="modalAddToCartBtn"
+              style={{ flex: 1 }}
+              onClick={handleAdd}
+            >
+              Add to Order &bull; ${(dish.price * modalQty).toFixed(2)}
+            </button>
+          </div>
         </div>
       </div>
     </div>
