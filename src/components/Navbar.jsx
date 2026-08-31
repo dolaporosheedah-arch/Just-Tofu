@@ -41,6 +41,14 @@ export default function Navbar({ onOpenCart }) {
     setDrawerOpen(false);
   };
 
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onOpenCart) {
+      onOpenCart();
+    }
+  };
+
   return (
     <>
       <header className={`site-header${scrolled ? " scrolled" : ""}`} id="mainHeader">
@@ -83,8 +91,9 @@ export default function Navbar({ onOpenCart }) {
           {/* Header Actions: Cart & Order Now */}
           <div className="header-actions">
             <button
+              type="button"
               className="cart-trigger-btn"
-              onClick={onOpenCart}
+              onClick={handleCartClick}
               aria-label="View Shopping Cart"
               id="headerCartBtn"
             >
@@ -110,6 +119,7 @@ export default function Navbar({ onOpenCart }) {
 
             {/* Mobile Hamburger Button */}
             <button
+              type="button"
               className="hamburger-btn"
               id="mobileMenuToggle"
               aria-label="Toggle navigation menu"
@@ -132,7 +142,7 @@ export default function Navbar({ onOpenCart }) {
         onNavigate={scrollToSection}
         onOpenCart={() => {
           setDrawerOpen(false);
-          onOpenCart();
+          if (onOpenCart) onOpenCart();
         }}
         cartCount={cartCount}
       />

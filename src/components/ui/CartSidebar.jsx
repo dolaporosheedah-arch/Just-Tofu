@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function CartSidebar({ open, onClose }) {
   const {
     cartItems,
-    cartCount,
     subtotal,
     tax,
     total,
@@ -18,8 +17,8 @@ export default function CartSidebar({ open, onClose }) {
   return (
     <>
       {/* Cart Drawer Panel */}
-      <div
-        className={`cart-drawer${open ? " active" : ""}`}
+      <aside
+        className={`cart-drawer${open ? " open" : ""}`}
         id="cartDrawer"
         aria-label="Your Food Order Cart"
         {...(!open ? { inert: "" } : {})}
@@ -29,6 +28,7 @@ export default function CartSidebar({ open, onClose }) {
             <span>🛒</span> Your Order
           </h3>
           <button
+            type="button"
             className="cart-close-btn"
             onClick={onClose}
             aria-label="Close cart"
@@ -46,6 +46,7 @@ export default function CartSidebar({ open, onClose }) {
                 Explore our menu and add your favorite fresh tofu dishes to get started.
               </p>
               <button
+                type="button"
                 className="btn btn-outline"
                 onClick={() => {
                   onClose();
@@ -59,32 +60,53 @@ export default function CartSidebar({ open, onClose }) {
           ) : (
             <div className="cart-items-list" id="cartItemsList">
               {cartItems.map((item) => (
-                <div key={item.id} className="cart-item">
+                <div key={item.id} className="cart-item-card">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="cart-item-img"
+                    className="cart-item-thumb"
                   />
                   <div className="cart-item-details">
-                    <h5 className="cart-item-title">{item.name}</h5>
-                    <div className="cart-item-price-unit">
-                      ${item.price.toFixed(2)} each
+                    <div className="cart-item-top">
+                      <div>
+                        <h5 className="cart-item-title">{item.name}</h5>
+                        <span className="cart-item-unit-price">
+                          ${item.price.toFixed(2)} each
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        className="cart-item-remove"
+                        onClick={() => removeFromCart(item.id)}
+                        title="Remove item"
+                        aria-label={`Remove ${item.name}`}
+                      >
+                        &times;
+                      </button>
                     </div>
+
                     {item.instructions && (
-                      <div className="cart-item-notes">“{item.instructions}”</div>
+                      <div style={{ fontSize: "0.75rem", fontStyle: "italic", color: "var(--color-accent)", margin: "0.2rem 0" }}>
+                        “{item.instructions}”
+                      </div>
                     )}
+
                     <div className="cart-item-bottom">
                       <div className="qty-stepper">
                         <button
+                          type="button"
                           className="qty-btn"
                           onClick={() => updateQty(item.id, item.qty - 1)}
+                          aria-label="Decrease quantity"
                         >
                           −
                         </button>
                         <span className="qty-val">{item.qty}</span>
                         <button
+                          type="button"
                           className="qty-btn"
                           onClick={() => updateQty(item.id, item.qty + 1)}
+                          aria-label="Increase quantity"
                         >
                           +
                         </button>
@@ -92,13 +114,6 @@ export default function CartSidebar({ open, onClose }) {
                       <span className="cart-item-subtotal">
                         ${(item.price * item.qty).toFixed(2)}
                       </span>
-                      <button
-                        className="cart-item-remove-btn"
-                        onClick={() => removeFromCart(item.id)}
-                        title="Remove item"
-                      >
-                        🗑
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -125,6 +140,7 @@ export default function CartSidebar({ open, onClose }) {
             </div>
 
             <button
+              type="button"
               className="btn btn-checkout"
               id="proceedToCheckoutBtn"
               onClick={() => setCheckoutOpen(true)}
@@ -133,12 +149,14 @@ export default function CartSidebar({ open, onClose }) {
             </button>
           </div>
         )}
-      </div>
+      </aside>
 
+      {/* Backdrop overlay */}
       <div
         className={`overlay-backdrop${open ? " active" : ""}`}
         id="cartOverlay"
         onClick={onClose}
+        style={{ zIndex: 1090 }}
       ></div>
 
       {checkoutOpen && (
